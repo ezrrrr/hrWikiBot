@@ -67,34 +67,20 @@ with st.sidebar:
     for cat in CATEGORIES:
         st.subheader("- " + cat)
     st.markdown("---")
-    # st.caption("카테고리를 고르면 해당 주제 관련 문서를 우선 검색합니다.")
-    # st.title("⚙️ 설정")
-    # if missing:
-    #    st.error(
-    #        "다음 환경변수를 .env에 채워주세요:\n"
-    #        + "\n".join(f"- {m}" for m in missing)
-    #    )
-    # top_k = st.slider("검색 문서 수 (Top-K)", 1, 8, 3)
-    # use_highlight = st.checkbox("하이라이트 표시", True)
-    # use_semantic = st.checkbox("시맨틱 검색(가능 리전/SKU)", False)
-    # sem_config = (
-    #    st.text_input("시맨틱 구성 이름", value="default") if use_semantic else None
-    # )
-    # temperature = st.slider("모델 Temperature", 0.0, 1.0, 0.2, 0.1)
-    # max_ctx = st.number_input("컨텍스트 최대 길이(글자수)", 1000, 20000, 8000, 500)
-
     top_k = st.slider("검색 문서 수 (Top-K)", 1, 8, 3)
-st.markdown(
-    """
-    <style>
-    .footer {position: fixed;left: 0;bottom: 0;width: 100%;background-color: #f5f5f5;color: gray;text-align: center;padding: 8px;font-size: 13px;border-top: 1px solid #ddd; z-index:9999}
-    </style>
-    <div class="footer">
-        © 2025 HRWikiBot | 내부용 상담 서비스
-    </div>
-""",
-    unsafe_allow_html=True,
-)
+
+    # ---------- 푸터 ----------
+    st.markdown(
+        """
+        <style>
+        .footer {position: fixed;left: 0;bottom: 0;width: 100%;background-color: #f5f5f5;color: gray;text-align: center;padding: 8px;font-size: 13px;border-top: 1px solid #ddd; z-index:9999}
+        </style>
+        <div class="footer">
+            © 2025 HRWikiBot | 내부용 상담 서비스
+        </div>
+    """,
+        unsafe_allow_html=True,
+    )
 
 
 # ---------- 클라이언트 (캐시) ----------
@@ -223,7 +209,7 @@ def ask_rag(query: str, docs: List[Dict[str, Any]]) -> str:
     return resp.choices[0].message.content
 
 
-# ---- 2단 레이아웃
+# ---- 컨텐츠 2단 레이아웃
 main, right = st.columns([0.66, 0.36], gap="large")
 # ---------- UI ----------
 # Main
