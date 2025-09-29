@@ -1,0 +1,5 @@
+fastapi>=0.112,<0.113
+uvicorn[standard]>=0.30,<0.31
+botbuilder-core>=4.14,<5.0
+botbuilder-schema>=4.14,<5.0
+python-dotenv>=1.0,<2.0

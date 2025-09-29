@@ -1,0 +1,13 @@
+## 파일 무시
+#test.txt
+.env
+
+## 다음과 같은 확장자는 전체 무시
+#*.text
+#*.exe
+#*.zip
+
+## 폴더 무시
+.venv/
+.vscode/
+__pycache__/
