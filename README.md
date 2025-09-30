@@ -1,5 +1,5 @@
 # 프로젝트명 : HrWikiBot [링크](https://hrwikibot-app.azurewebsites.net/)
-
+> **작성자:** 이지연  ·  **부서:** 전략AX사업본부 통합IT운영팀
 
 ## 0. 기획 의도
 - **고객의 니즈** HR 규정 안내, 출장 여비 안내, 입사 첫날 보안 규약 등
