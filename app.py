@@ -1,15 +1,12 @@
 import os, re, base64, textwrap
 from typing import List, Dict, Any
-
-import streamlit as st
 from dotenv import load_dotenv
+import streamlit as st
 
 from azure.core.credentials import AzureKeyCredential
 from azure.search.documents import SearchClient
 from openai import AzureOpenAI
 
-# ---------- 초기 설정 ----------
-st.set_page_config(page_title="HRWikiBot – UI", layout="wide")
 load_dotenv()
 
 SEARCH_ENDPOINT = os.getenv("SEARCH_ENDPOINT")
@@ -46,7 +43,7 @@ max_ctx = 1000
 temperature = 0.7
 
 
-APP_TITLE = "사내 가이드북 챗봇"
+APP_TITLE = "HRWikiBot - 사내 가이드북 챗봇"
 CATEGORIES = [
     "HR/인사",
     "근로시간·휴가",
@@ -58,6 +55,7 @@ CATEGORIES = [
     "FAQ",
 ]
 
+# ---------- 초기 설정 ----------
 st.set_page_config(page_title=APP_TITLE, page_icon="🗂️", layout="wide")
 
 # ---------- 사이드바 ----------
@@ -191,10 +189,8 @@ def ask_rag(query: str, docs: List[Dict[str, Any]]) -> str:
         return "관련 문서 컨텍스트가 없습니다. 질문을 다르게 해보거나 인덱스를 확인해주세요."
     sys_prompt = textwrap.dedent(
         """\
-        당신은 HR 규정 도우미입니다. 제공된 문서 발췌를 근거로
-        질문에 한국어로 정확하고 간결하게 답하세요.
-        모르면 모른다고 답하고, 추측은 피하세요.
-        답변 끝에 참고한 문서 번호를 대괄호로 표기하세요. 예: [1][2]
+너는 HR 규정 도우미 챗봇이야.
+다음 문서를 참고하여 사용자의 질문에 답해줘.
     """
     ).strip()
     user_prompt = f"# 문서 발췌\n{ctx}\n\n# 질문\n{query}"
@@ -238,16 +234,16 @@ if btn_search:
         st.subheader("💬 답변")
         st.markdown(answer)
 
-        st.subheader(f"검색 결과 ({len(docs)}건)")
-
         # 참고 문서 간단 출력
         refs = []
-        for i, d in enumerate(docs[:5], 1):
-            p = decode_blob_path(d.get("metadata_storage_path"))
-            refs.append(f"[{i}] {d.get('metadata_storage_name')}  |  {p}")
+
+        if docs:
+            d = docs[0]  # 첫 번째 문서만 가져옴
+            refs.append(f"[1] {d.get('metadata_storage_name')}")
         if refs:
             st.markdown("**참고 문서:**\n" + "\n".join(refs))
 
+        st.subheader(f"검색 결과 ({len(docs)}건)")
         if not docs:
             st.info("검색 결과가 없습니다. 질문을 바꿔보거나 인덱스를 확인해 주세요.")
         for i, d in enumerate(docs, 1):
@@ -263,8 +259,6 @@ if btn_search:
                         )
                 else:
                     st.markdown(clean_text(pick_body(d), 500))
-                if path:
-                    st.markdown(f"[원문 열기]({path})")
 
     except Exception as e:
         st.error(f"오류: {e}")
@@ -274,29 +268,14 @@ if btn_search:
 # Right panel
 with right:
     st.subheader("보조 정보")
-    tabs = st.tabs(["📂 관련 문서 미리보기", "📊 인기 FAQ TOP5", "📝 신입 체크리스트"])
+    tabs = st.tabs(["📝슬기로운 신입생활", "📊 인기 복지 TOP5"])
     with tabs[0]:
-        st.info("검색 후 문서 미리보기가 표시됩니다.")
-        # if st.session_state.last_hits:
-        #    h0 = st.session_state.last_hits[0]
-        #    st.markdown(f"**{h0['title']}**")
-        #    st.code(
-        #        h0["content"][:500] + ("…" if len(h0["content"]) > 500 else ""),
-        #        language="text",
-        #    )
-        #    st.caption(f"출처: {h0['source']}")
-        # else:
-        #    st.info("검색 후 문서 미리보기가 표시됩니다.")
+        st.markdown(" 💬 첫출근을 했어요")
+        st.markdown(" 💬 복지몰과 복지포인트")
+        st.markdown(" 💬 점심 식사 관련")
+        st.markdown(" 💬 비혼선언")
     with tabs[1]:
-        st.info("검색 후 문서 미리보기가 표시됩니다.")
-        # for i, item in enumerate(st.session_state.faq, start=1):
-        #    st.markdown(f"{i}. {item}")
-    with tabs[2]:
-        for it in [
-            "사번 발급 및 HR 등록",
-            "전자결재 계정 생성",
-            "오리엔테이션 참석",
-            "보안/윤리 교육 이수",
-            "복지몰 계정 활성화",
-        ]:
-            st.checkbox(it, value=False)
+        st.markdown(" 🧾 가족 결혼 복지")
+        st.markdown(" 🧾 사내 봉사활동")
+        st.markdown(" 🧾 가족이 돌아가셨어")
+        st.markdown(" 🧾 사내 동호회")
