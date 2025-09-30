@@ -40,3 +40,6 @@
 - **연차 신청, 증명서 발급 등 업무 처리 가이드 챗봇에서!**
 - **부서, 언어, 직무 등 나에게 맞는 맞춤 규정 안내 (기혼 유무, 직무 sw개발/PM/영업 등)**
 - **Teams/Slack으로 확장성(나의 업무공간에서 동일한 기능 이용)**
+
+<img width="959" height="461" alt="Image" src="https://github.com/user-attachments/assets/bd6e3c0f-b87b-4761-8f05-11bd999696e8" />
+<img width="960" height="460" alt="Image" src="https://github.com/user-attachments/assets/a69c0c2e-3466-4c68-aec0-dcb2f01ca3ce" />
