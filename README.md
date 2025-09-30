@@ -23,7 +23,7 @@
 ---
 
 ## 4. 일정 (체크리스트)
-- [9/29] Azure Search 인덱스 생성
+- [9/29] HR 규정 PDF 문서화, Azure Search 인덱스 생성
 - [9/29] AzureAI 모델 배포
 - [9/30] Streamlit UI 개발 & 최종 테스트
 - [10/1] 발표 및 마무리
