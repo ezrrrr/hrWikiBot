@@ -27,7 +27,7 @@
 - [9/29] HR 규정 PDF 문서화
 - [9/29] Azure Search 인덱스 생성
 - [9/29] AzureAI 모델 배포
-- [9/30] Search 기능 개발 & Streamlit UI 개발
+- [9/30] Azure OpenAI 답변 생성 개발 & Streamlit UI 처리
 - [10/1] 최종 테스트 & 발표 및 마무리
 
 
